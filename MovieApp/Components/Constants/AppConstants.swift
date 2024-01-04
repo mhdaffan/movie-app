@@ -17,4 +17,9 @@ struct AppConstants {
         return UIScreen.main.bounds.size.height
     }
     
+    static func sizeRatio(_ width: CGFloat, _ height: CGFloat, fromWidth: CGFloat) -> CGSize {
+        let height = (height / width) * fromWidth
+        return CGSize(width: fromWidth, height: height)
+    }
+    
 }

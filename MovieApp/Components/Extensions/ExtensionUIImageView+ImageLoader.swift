@@ -10,6 +10,11 @@ import Kingfisher
 
 extension UIImageView {
     
+    /// load image assets from url
+    /// - Parameters:
+    ///   - urlString: image url string
+    ///   - placeholder: placeholder during retrieving image and failure
+    ///   - contentMode: image's content mode when success
     func load(_ urlString: String, placeholder: UIImage? = nil, contentMode: UIView.ContentMode = .scaleAspectFill) {
         var newUrl = urlString
         if let url = newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
