@@ -8,28 +8,19 @@
 import UIKit
 import RxSwift
 import SnapKit
+import IGListKit
 
 final class MovieViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    private(set) lazy var searchController = UISearchController().then {
-        $0.obscuresBackgroundDuringPresentation = false
-        $0.hidesNavigationBarDuringPresentation = false
-        $0.searchBar.placeholder = "Search"
-        $0.searchBar.delegate = self
-    }
+    lazy private(set) var adapter = ListAdapter(updater: ListAdapterUpdater(), viewController: self)
     private lazy var flowLayout = UICollectionViewFlowLayout().then {
-        $0.itemSize = AppConstants.sizeRatio(67, 100, fromWidth: (AppConstants.screenWidth - 72) / 2 )
-        $0.scrollDirection = .vertical
-        $0.minimumInteritemSpacing = 24
         $0.minimumLineSpacing = 24
     }
     private(set) lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout).then {
         $0.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
         $0.backgroundColor = .white
-        $0.dataSource = self
-        $0.delegate = self
         $0.register(cell: MovieItemCollectionViewCell.self)
     }
     
@@ -62,11 +53,12 @@ final class MovieViewController: BaseViewController {
     func configureUI() {
         view.backgroundColor = .white
         title = "Movies"
-        navigationItem.searchController = searchController
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(view)
         }
+        adapter.collectionView = collectionView
+        adapter.dataSource = self
     }
     
     func bindViewModel() {
@@ -74,11 +66,13 @@ final class MovieViewController: BaseViewController {
             viewModel.stateSubject.subscribe(
                 scheduler: scheduler,
                 onNext: { [weak self] state in
+                    self?.loadingIndicator(isLoading: state.isLoading())
                     switch state {
                     case .failed(let error):
                         print(error.localizedDescription)
                     case .loaded:
-                        self?.collectionView.reloadData()
+                        self?.adapter.performUpdates(animated: true)
+                        self?.adapter.refreshVisibleControllers()
                     default:
                         break
                     }
@@ -88,41 +82,45 @@ final class MovieViewController: BaseViewController {
     
 }
 
-// MARK: - UISearchBarDelegate
+// MARK: - ListAdapterDataSource
 
-extension MovieViewController: UISearchBarDelegate {
+extension MovieViewController: ListAdapterDataSource {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text, !text.isEmpty {
-            searchBar.text = ""
-            searchController.dismiss(animated: true)
+    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+        return viewModel.data
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        switch object {
+        case is MovieList:
+            return MovieListSectionController(delegate: self)
+        case is FavoriteMovieList:
+            return FavoriteMovieListSectionController(delegate: self)
+        default:
+            return ListSectionController()
         }
     }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension MovieViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+        return nil
     }
     
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - MoviesSectionDelegate
 
-extension MovieViewController: UICollectionViewDataSource {
+extension MovieViewController: MoviesSectionDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.movies.value.count
+    func didSelectItem(item: MovieModel) {
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cell: MovieItemCollectionViewCell.self)
-        cell.updateUI(movie: viewModel.movies.value[indexPath.row])
-        
-        return cell
+    func didSelectLove(item: MovieModel, loved: Bool) {
+        if loved {
+            viewModel.savedToFavorite(movie: item)
+        } else {
+            viewModel.removeFromFavorite(movie: item)
+        }
     }
     
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieModel: Codable {
+class MovieModel: NSObject, Codable {
     let trackId: Int
     let artistName: String
     let trackName: String

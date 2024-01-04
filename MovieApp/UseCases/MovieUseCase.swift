@@ -8,15 +8,17 @@
 import RxSwift
 
 protocol MovieUseCase {
-    func getMovies(keyword: String, country: String) -> Observable<[MovieModel]>
+    func getMovies(keyword: String, country: String) -> Observable<MovieList>
 }
 
 struct MovieUseCaseImpl: MovieUseCase {
     
     @Injected(\.movieRepository) var repo
     
-    func getMovies(keyword: String, country: String) -> Observable<[MovieModel]> {
-        return repo.getMovies(keyword: keyword, country: country)
+    func getMovies(keyword: String, country: String) -> Observable<MovieList> {
+        return repo.getMovies(keyword: keyword, country: country).flatMap { movies in
+            return Observable.just(MovieList(movies: movies))
+        }
     }
     
 }
