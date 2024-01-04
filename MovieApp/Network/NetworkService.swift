@@ -14,9 +14,7 @@ protocol NetworkService {
 
 class NetworkServiceImpl: NetworkService {
     
-    var networkConfig: NetworkConfigurable = NetworkConfiguration(
-        baseURL: "",
-        headers: [:])
+    @Injected(\.networkConfiguration) var networkConfig: NetworkConfigurable
 
     func request(with endpoint: Requestable) -> Observable<Data> {
         do {
@@ -28,8 +26,7 @@ class NetworkServiceImpl: NetworkService {
                     }
                     
                     guard let data = data else {
-                        let error = NSError(domain: "", code: 1001, userInfo: [ NSLocalizedDescriptionKey: "Data Not Found" ])
-                        observer.onError(APIError.parseError)
+                        observer.onError(APIError.noData)
                         return
                     }
                     

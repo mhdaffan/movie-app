@@ -14,7 +14,7 @@ protocol DataTransferService {
 
 class DataTransferServiceImpl: DataTransferService {
     
-    var networkService: NetworkService = NetworkServiceImpl()
+    @Injected(\.networkService) var networkService: NetworkService
     
     func request<T: Decodable>(with endpoint: DataEndpoint<T>) -> Observable<T> {
         networkService.request(with: endpoint)
