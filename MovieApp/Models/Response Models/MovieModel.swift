@@ -7,11 +7,17 @@
 
 import Foundation
 
-struct MovieModel: Codable {
+class MovieModel: NSObject, Codable {
     let trackId: Int
     let artistName: String
     let trackName: String
     let artworkUrl100: String?
+    
+    var loved: Bool = false
+    
+    enum CodingKeys: String, CodingKey {
+        case trackId, artistName, trackName, artworkUrl100
+    }
 }
 
 extension MovieModel {

@@ -1,5 +1,5 @@
 //
-//  MovieItemCollectionViewCell.swift
+//  FavoriteMovieItemCell.swift
 //  MovieApp
 //
 //  Created by Muhammad Affan on 04/01/24.
@@ -8,23 +8,16 @@
 import UIKit
 import SnapKit
 
-final class MovieItemCollectionViewCell: UICollectionViewCell {
-    
-    // MARK: - Delegates
-    
-    var onTapLoveButton: ((Bool) -> Void)?
+final class FavoriteMovieItemCell: UICollectionViewCell {
     
     // MARK: - UI Properties
     
     let artworkImageView = UIImageView(image: UIImage(resource: .icEmpty)).then {
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFit
-    }
-    
-    private(set) lazy var loveButton = UIButton().then {
-        $0.setImage(.icHeartFill?.resize(to: CGSize(width: 30, height: 30))?.color(.darkGray), for: .normal)
-        $0.setImage(.icHeartFill?.resize(to: CGSize(width: 30, height: 30))?.color(.red), for: .selected)
+        $0.layer.borderColor = UIColor.blue.withAlphaComponent(0.5).cgColor
+        $0.layer.borderWidth = 2
     }
     
     // MARK: - Initialized
@@ -47,29 +40,16 @@ final class MovieItemCollectionViewCell: UICollectionViewCell {
     
     func configureUI() {
         contentView.backgroundColor = .white
-        contentView.addSubviews(artworkImageView, loveButton)
+        contentView.addSubview(artworkImageView)
         artworkImageView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
-        loveButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.top.trailing.equalToSuperview().inset(2)
-            $0.width.height.equalTo(40)
-        }
-        loveButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.tapLoveButton()
-        }), for: .primaryActionTriggered)
-    }
-    
-    func tapLoveButton() {
-        loveButton.isSelected.toggle()
-        onTapLoveButton?(loveButton.isSelected)
     }
     
     func updateUI(movie: MovieModel) {
         let url = movie.artworkUrl100.orEmpty.replacingOccurrences(of: "100x100", with: "500x500")
         artworkImageView.load(url, placeholder: UIImage(resource: .icEmpty))
-        loveButton.isSelected = movie.loved
     }
     
 }
+

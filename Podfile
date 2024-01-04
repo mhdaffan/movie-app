@@ -6,6 +6,7 @@ target 'MovieApp' do
   use_frameworks!
   pod 'netfox', '1.21.0'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'IGListKit', '4.0.0'
   pod 'Kingfisher', '~> 7.0'
   pod 'RxSwift', '6.6.0'
   pod 'RxCocoa', '6.6.0'
