@@ -58,6 +58,10 @@
 		36A1D0DB2B46C3690071620E /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0DA2B46C3690071620E /* ImageConstants.swift */; };
 		36A1D0DD2B46C4DC0071620E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0DC2B46C4DC0071620E /* ExtensionUIImage.swift */; };
 		36A1D0DF2B46CE4E0071620E /* ExtensionListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0DE2B46CE4E0071620E /* ExtensionListAdapter.swift */; };
+		36A1D0E22B46D1DB0071620E /* UserDefaultObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0E12B46D1DB0071620E /* UserDefaultObject.swift */; };
+		36A1D0E42B46D22A0071620E /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0E32B46D22A0071620E /* UserDefaultStorage.swift */; };
+		36A1D0E62B46D36B0071620E /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0E52B46D36B0071620E /* UserDefaultsRepository.swift */; };
+		36A1D0E82B46D4820071620E /* UserDefaultsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0E72B46D4820071620E /* UserDefaultsUseCase.swift */; };
 		621EBDC85785DDFEFFE8A847 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA8DC0354C698E64D05521A /* Pods_MovieApp.framework */; };
 		BDB0BDC4CF21DB2E8A6A0813 /* Pods_MovieApp_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3403B7BF9F111EE8A6D3A66B /* Pods_MovieApp_MovieAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -136,6 +140,10 @@
 		36A1D0DA2B46C3690071620E /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		36A1D0DC2B46C4DC0071620E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		36A1D0DE2B46CE4E0071620E /* ExtensionListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionListAdapter.swift; sourceTree = "<group>"; };
+		36A1D0E12B46D1DB0071620E /* UserDefaultObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultObject.swift; sourceTree = "<group>"; };
+		36A1D0E32B46D22A0071620E /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
+		36A1D0E52B46D36B0071620E /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
+		36A1D0E72B46D4820071620E /* UserDefaultsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUseCase.swift; sourceTree = "<group>"; };
 		377F47FC08CAFD998E0A8CCF /* Pods-MovieApp-MovieAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		44D3E40920EA637238D5A4BB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		7588FFE644E97B3B39D0BA22 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +206,7 @@
 		36A1D0492B4667410071620E /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				36A1D0E02B46D1C80071620E /* Persistent */,
 				36A1D0AC2B468AC40071620E /* Base */,
 				36A1D07F2B4672430071620E /* DI */,
 				36A1D07A2B4671F10071620E /* Screens */,
@@ -257,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				36A1D0BD2B46A1C80071620E /* MovieRepository.swift */,
+				36A1D0E52B46D36B0071620E /* UserDefaultsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -265,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				36A1D0C12B46A91D0071620E /* MovieUseCase.swift */,
+				36A1D0E72B46D4820071620E /* UserDefaultsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -401,6 +412,15 @@
 				36A1D0D42B46B7CD0071620E /* MovieListSectionController.swift */,
 			);
 			path = "List Section Controllers";
+			sourceTree = "<group>";
+		};
+		36A1D0E02B46D1C80071620E /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				36A1D0E12B46D1DB0071620E /* UserDefaultObject.swift */,
+				36A1D0E32B46D22A0071620E /* UserDefaultStorage.swift */,
+			);
+			path = Persistent;
 			sourceTree = "<group>";
 		};
 		8F28F839314D0C5BBA5BE3CC /* Pods */ = {
@@ -676,8 +696,11 @@
 				36A1D08C2B46753D0071620E /* ExtensionUIView.swift in Sources */,
 				36A1D0D52B46B7CD0071620E /* MovieListSectionController.swift in Sources */,
 				36A1D0CF2B46B3440071620E /* FavoriteMovieListSectionController.swift in Sources */,
+				36A1D0E22B46D1DB0071620E /* UserDefaultObject.swift in Sources */,
 				36A1D0882B4674B10071620E /* Then.swift in Sources */,
+				36A1D0E62B46D36B0071620E /* UserDefaultsRepository.swift in Sources */,
 				36A1D0DD2B46C4DC0071620E /* ExtensionUIImage.swift in Sources */,
+				36A1D0E42B46D22A0071620E /* UserDefaultStorage.swift in Sources */,
 				36A1D0C62B46A9880071620E /* UseCaseInjectionKey.swift in Sources */,
 				36A1D0D92B46BBEF0071620E /* FavoriteMovieList.swift in Sources */,
 				36A1D0B32B4696930071620E /* ReusableViewCell.swift in Sources */,
@@ -698,6 +721,7 @@
 				36A1D0A92B4689420071620E /* MovieViewController.swift in Sources */,
 				36A1D0C42B46A9590071620E /* RepositoryInjectionKey.swift in Sources */,
 				36A1D0AB2B46894C0071620E /* MovieViewModel.swift in Sources */,
+				36A1D0E82B46D4820071620E /* UserDefaultsUseCase.swift in Sources */,
 				36A1D08E2B4675A40071620E /* ExtensionUIImageView+ImageLoader.swift in Sources */,
 				36A1D0B52B4696B40071620E /* MovieItemCollectionViewCell.swift in Sources */,
 				36A1D0BB2B469C690071620E /* ExtensionString.swift in Sources */,

@@ -65,9 +65,11 @@ final class MovieItemCollectionViewCell: UICollectionViewCell {
         loveButton.isSelected.toggle()
         onTapLoveButton?(loveButton.isSelected)
     }
+    
     func updateUI(movie: MovieModel) {
         let url = movie.artworkUrl100.orEmpty.replacingOccurrences(of: "100x100", with: "500x500")
         artworkImageView.load(url, placeholder: UIImage(resource: .icEmpty))
+        loveButton.isSelected = movie.loved
     }
     
 }

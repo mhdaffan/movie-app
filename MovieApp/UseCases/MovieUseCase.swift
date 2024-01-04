@@ -14,10 +14,17 @@ protocol MovieUseCase {
 struct MovieUseCaseImpl: MovieUseCase {
     
     @Injected(\.movieRepository) var repo
+    @Injected(\.userDefaultsUseCase) var userDefaultsUseCase
     
     func getMovies(keyword: String, country: String) -> Observable<MovieList> {
         return repo.getMovies(keyword: keyword, country: country).flatMap { movies in
-            return Observable.just(MovieList(movies: movies))
+            let favoriteMovies = userDefaultsUseCase.getFavoriteMovies()
+            let _movies = movies.map { movie in
+                movie.loved = favoriteMovies.contains(where: { $0.trackId == movie.trackId})
+                return movie
+            }
+            
+            return Observable.just(MovieList(movies: _movies))
         }
     }
     

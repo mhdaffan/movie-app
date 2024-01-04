@@ -14,6 +14,7 @@ final class MovieViewModel: BaseViewModel {
     // MARK: - Injected
     
     @Injected(\.movieUseCase) var movieUseCase
+    @Injected(\.userDefaultsUseCase) var userDefaultsUseCase
     
     // MARK: - Observables
     
@@ -56,18 +57,17 @@ final class MovieViewModel: BaseViewModel {
     // MARK: - Local Data
     
     func savedToFavorite(movie: MovieModel) {
-        guard !favoriteMovieList.movies.contains(where: { $0.trackId == movie.trackId }) else {
-            return
-        }
-        favoriteMovieList.movies.append(movie)
-        sortData()
+        userDefaultsUseCase.savedToFavorite(movie: movie)
+        updateFavoriteMovies()
     }
     
     func removeFromFavorite(movie: MovieModel) {
-        guard let index = favoriteMovieList.movies.firstIndex(of: movie) else {
-            return
-        }
-        favoriteMovieList.movies.remove(at: index)
+        userDefaultsUseCase.removeFromFavorite(movie: movie)
+        updateFavoriteMovies()
+    }
+    
+    func updateFavoriteMovies() {
+        self.favoriteMovieList.movies = userDefaultsUseCase.getFavoriteMovies()
         sortData()
     }
     

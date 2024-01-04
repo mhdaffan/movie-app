@@ -48,6 +48,11 @@ final class MovieViewController: BaseViewController {
         viewModel.getMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateFavoriteMovies()
+    }
+    
     // MARK: - Internal Methods
     
     func configureUI() {
