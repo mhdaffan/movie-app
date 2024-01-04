@@ -8,6 +8,7 @@
 import RxSwift
 
 class BaseViewModel {
+    var scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance
     var disposeBag = DisposeBag()
     var stateSubject = PublishSubject<ScreenState>()
 }
