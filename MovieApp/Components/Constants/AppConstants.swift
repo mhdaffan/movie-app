@@ -22,4 +22,7 @@ struct AppConstants {
         return CGSize(width: fromWidth, height: height)
     }
     
+    static var movieSize: CGSize {
+        return sizeRatio(67, 100, fromWidth: (screenWidth - 72) / 2)
+    }
 }

@@ -18,24 +18,61 @@ final class MovieViewModel: BaseViewModel {
     
     // MARK: - Observables
     
+    var keyword = BehaviorRelay<String>(value: "")
     var data: [ListDiffable] = []
     var movieList = MovieList(movies: [])
     var favoriteMovieList = FavoriteMovieList(movies: [])
+    
+    var filteredData: [ListDiffable] = []
+    var filteredMovieList = MovieList(movies: [])
+    var filteredFavoriteMovieList = FavoriteMovieList(movies: [])
     
     // MARK: - Internal Methods
     
     func sortData() {
         data.removeAll()
         
-        if !favoriteMovieList.movies.isEmpty {
-            data.append(favoriteMovieList)
-        }
-        
-        if !movieList.movies.isEmpty {
-            data.append(movieList)
+        if keyword.value.isEmpty {
+            sortRealData()
+        } else {
+            sortFilteredData()
         }
         
         stateSubject.onNext(.loaded)
+    }
+    
+    func sortRealData() {
+        if !favoriteMovieList.movies.isEmpty {
+            data.append(favoriteMovieList)
+        }
+        if !movieList.movies.isEmpty {
+            data.append(movieList)
+        }
+    }
+    
+    func sortFilteredData() {
+        if !filteredFavoriteMovieList.movies.isEmpty {
+            data.append(filteredFavoriteMovieList)
+        }
+        if !filteredMovieList.movies.isEmpty {
+            data.append(filteredMovieList)
+        }
+    }
+    
+    // update movie's loved status if needed
+    func validateMovieList() {
+        let favoriteMovies = userDefaultsUseCase.getFavoriteMovies()
+        movieList.movies = movieList.movies.map { movie in
+            movie.loved = favoriteMovies.contains(where: { $0.trackId == movie.trackId})
+            return movie
+        }
+        sortData()
+    }
+    
+    func search(keyword: String) {
+        filteredMovieList.movies = movieList.movies.filter { $0.trackName.contains(keyword) }
+        filteredFavoriteMovieList.movies = favoriteMovieList.movies.filter { $0.trackName.contains(keyword) }
+        sortData()
     }
     
     // MARK: - Network Calls
@@ -58,11 +95,13 @@ final class MovieViewModel: BaseViewModel {
     
     func savedToFavorite(movie: MovieModel) {
         userDefaultsUseCase.savedToFavorite(movie: movie)
+        movieList.movies.first(where: { $0.trackId == movie.trackId })?.loved = true
         updateFavoriteMovies()
     }
     
     func removeFromFavorite(movie: MovieModel) {
         userDefaultsUseCase.removeFromFavorite(movie: movie)
+        movieList.movies.first(where: { $0.trackId == movie.trackId })?.loved = false
         updateFavoriteMovies()
     }
     
