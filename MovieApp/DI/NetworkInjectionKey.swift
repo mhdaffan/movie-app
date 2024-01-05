@@ -5,6 +5,10 @@
 //  Created by Muhammad Affan on 04/01/24.
 //
 
+struct NetworkSessionInjectionKey: InjectionKey {
+    static var currentValue: NetworkSession = NetworkSessionImpl()
+}
+
 struct NetworkServiceInjectionKey: InjectionKey {
     static var currentValue: NetworkService = NetworkServiceImpl()
 }
@@ -27,6 +31,11 @@ extension InjectedValue {
     var networkConfiguration: NetworkConfigurable {
         get { Self[NetworkConfigurationInjectionKey.self] }
         set { Self[NetworkConfigurationInjectionKey.self] = newValue }
+    }
+    
+    var networkSession: NetworkSession {
+        get { Self[NetworkSessionInjectionKey.self] }
+        set { Self[NetworkSessionInjectionKey.self] = newValue }
     }
     
     var networkService: NetworkService {
