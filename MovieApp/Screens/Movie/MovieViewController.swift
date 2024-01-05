@@ -14,6 +14,10 @@ final class MovieViewController: BaseViewController {
     
     // MARK: - UI Properties
     
+    private(set) lazy var searchController = UISearchController().then {
+        $0.searchBar.placeholder = "Search"
+        $0.searchBar.delegate = self
+    }
     lazy private(set) var adapter = ListAdapter(updater: ListAdapterUpdater(), viewController: self)
     private lazy var flowLayout = UICollectionViewFlowLayout().then {
         $0.minimumLineSpacing = 24
@@ -51,6 +55,7 @@ final class MovieViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.updateFavoriteMovies()
+        viewModel.validateMovieList()
     }
     
     // MARK: - Internal Methods
@@ -58,6 +63,7 @@ final class MovieViewController: BaseViewController {
     func configureUI() {
         view.backgroundColor = .white
         title = "Movies"
+        navigationItem.searchController = searchController
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(view)
@@ -76,15 +82,30 @@ final class MovieViewController: BaseViewController {
                     case .failed(let error):
                         print(error.localizedDescription)
                     case .loaded:
-                        self?.adapter.performUpdates(animated: true)
-                        self?.adapter.refreshVisibleControllers()
+                        self?.adapter.reloadData()
                     default:
                         break
                     }
-                })
+                }),
+            viewModel.keyword
+                .debounce(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
+                .subscribe(
+                    scheduler: scheduler,
+                    onNext: { [weak self] keyword in
+                        self?.viewModel.search(keyword: keyword)
+                    })
         )
     }
     
+}
+
+// MARK: - UISearchBarDelegate
+
+extension MovieViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.keyword.accept(searchText)
+    }
 }
 
 // MARK: - ListAdapterDataSource
@@ -117,7 +138,7 @@ extension MovieViewController: ListAdapterDataSource {
 extension MovieViewController: MoviesSectionDelegate {
     
     func didSelectItem(item: MovieModel) {
-        
+        navigationController?.pushViewController(MovieDetailViewController.build(movie: item), animated: true)
     }
     
     func didSelectLove(item: MovieModel, loved: Bool) {

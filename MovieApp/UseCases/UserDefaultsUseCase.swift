@@ -16,7 +16,10 @@ struct UserDefaultsUseCaseImpl: UserDefaultsUseCase {
     @Injected(\.userDefaultsRepository) var repo
     
     func getFavoriteMovies() -> [MovieModel] {
-        repo.getFavoriteMovies()
+        return repo.getFavoriteMovies().map { movie in
+            movie.loved = true
+            return movie
+        }
     }
     
     func savedToFavorite(movie: MovieModel) {

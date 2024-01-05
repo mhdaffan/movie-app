@@ -40,7 +40,8 @@ final class MovieListSectionController: ListSectionController {
     }
     
     override func sizeForItem(at index: Int) -> CGSize {
-        return AppConstants.sizeRatio(67, 100, fromWidth: (AppConstants.screenWidth - 72) / 2)
+        let size = AppConstants.movieSize
+        return CGSize(width: size.width, height: size.height + 50)
     }
     
     override func didUpdate(to object: Any) {

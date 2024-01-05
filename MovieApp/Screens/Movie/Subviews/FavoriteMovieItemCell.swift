@@ -47,8 +47,7 @@ final class FavoriteMovieItemCell: UICollectionViewCell {
     }
     
     func updateUI(movie: MovieModel) {
-        let url = movie.artworkUrl100.orEmpty.replacingOccurrences(of: "100x100", with: "500x500")
-        artworkImageView.load(url, placeholder: UIImage(resource: .icEmpty))
+        artworkImageView.load(movie.artworkUrl, placeholder: UIImage(resource: .icEmpty))
     }
     
 }
