@@ -20,7 +20,14 @@ class NetworkServiceImpl: NetworkService {
     func request(with endpoint: Requestable) -> Observable<Data> {
         do {
             let request = try endpoint.urlRequest(with: networkConfig)
-            return session.loadData(from: request).flatMap { data, _ in
+            return session.loadData(from: request).catch { error in
+                switch error._code {
+                case NSURLErrorNotConnectedToInternet, -1020:
+                    return Observable.error(APIError.noConnection)
+                default:
+                    return Observable.error(error)
+                }
+            }.flatMap { data, _ in
                 if let data {
                     return Observable.just(data)
                 } else {

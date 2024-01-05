@@ -66,6 +66,8 @@
 		36A1D0F32B47B3AA0071620E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0F22B47B3AA0071620E /* XCTestCase+MemoryLeakTracking.swift */; };
 		36A1D0F72B47B3EC0071620E /* NetworkSessionMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0F62B47B3EC0071620E /* NetworkSessionMockImpl.swift */; };
 		36A1D0F92B47B4280071620E /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0F82B47B4280071620E /* NetworkSession.swift */; };
+		36A1D0FB2B47B7090071620E /* NetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */; };
+		36A1D0FE2B47BC3B0071620E /* MovieModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0FD2B47BC3B0071620E /* MovieModelMock.swift */; };
 		621EBDC85785DDFEFFE8A847 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA8DC0354C698E64D05521A /* Pods_MovieApp.framework */; };
 		F0E7C6E65AB867F91FDA425B /* Pods_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01C5495F51B63665A6B0100 /* Pods_MovieAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -151,6 +153,8 @@
 		36A1D0F22B47B3AA0071620E /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		36A1D0F62B47B3EC0071620E /* NetworkSessionMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionMockImpl.swift; sourceTree = "<group>"; };
 		36A1D0F82B47B4280071620E /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTest.swift; sourceTree = "<group>"; };
+		36A1D0FD2B47BC3B0071620E /* MovieModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModelMock.swift; sourceTree = "<group>"; };
 		377F47FC08CAFD998E0A8CCF /* Pods-MovieApp-MovieAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		44D3E40920EA637238D5A4BB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		7588FFE644E97B3B39D0BA22 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		36A1D0602B4667420071620E /* MovieAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				36A1D0FC2B47BC230071620E /* Mock Models */,
 				36A1D0F42B47B3C40071620E /* Network */,
 				36A1D0F12B47B3A00071620E /* Helper */,
 			);
@@ -465,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				36A1D0F52B47B3E60071620E /* Mocks */,
+				36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -475,6 +481,14 @@
 				36A1D0F62B47B3EC0071620E /* NetworkSessionMockImpl.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		36A1D0FC2B47BC230071620E /* Mock Models */ = {
+			isa = PBXGroup;
+			children = (
+				36A1D0FD2B47BC3B0071620E /* MovieModelMock.swift */,
+			);
+			path = "Mock Models";
 			sourceTree = "<group>";
 		};
 		8F28F839314D0C5BBA5BE3CC /* Pods */ = {
@@ -799,7 +813,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A1D0FB2B47B7090071620E /* NetworkServiceTest.swift in Sources */,
 				36A1D0F32B47B3AA0071620E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				36A1D0FE2B47BC3B0071620E /* MovieModelMock.swift in Sources */,
 				36A1D0F72B47B3EC0071620E /* NetworkSessionMockImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,6 +1051,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -1055,6 +1072,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
