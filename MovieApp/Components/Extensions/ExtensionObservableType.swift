@@ -9,7 +9,7 @@ import RxSwift
 
 extension ObservableType {
     
-    func subscribe(scheduler: ImmediateSchedulerType, onNext: ((Element) -> Void)?, onError: ((Swift.Error) -> Void)? = nil) -> Disposable {
+    func subscribe(scheduler: ImmediateSchedulerType, onNext: ((Element) -> Void)? = nil, onError: ((Swift.Error) -> Void)? = nil) -> Disposable {
         return self.observe(on: scheduler).subscribe(onNext: onNext, onError: onError)
     }
     
