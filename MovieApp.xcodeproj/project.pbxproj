@@ -68,6 +68,7 @@
 		36A1D0F92B47B4280071620E /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0F82B47B4280071620E /* NetworkSession.swift */; };
 		36A1D0FB2B47B7090071620E /* NetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */; };
 		36A1D0FE2B47BC3B0071620E /* MovieModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0FD2B47BC3B0071620E /* MovieModelMock.swift */; };
+		36A1D1002B47BE3F0071620E /* DataTransferServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A1D0FF2B47BE3F0071620E /* DataTransferServiceTest.swift */; };
 		621EBDC85785DDFEFFE8A847 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA8DC0354C698E64D05521A /* Pods_MovieApp.framework */; };
 		F0E7C6E65AB867F91FDA425B /* Pods_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01C5495F51B63665A6B0100 /* Pods_MovieAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -155,6 +156,7 @@
 		36A1D0F82B47B4280071620E /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTest.swift; sourceTree = "<group>"; };
 		36A1D0FD2B47BC3B0071620E /* MovieModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModelMock.swift; sourceTree = "<group>"; };
+		36A1D0FF2B47BE3F0071620E /* DataTransferServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferServiceTest.swift; sourceTree = "<group>"; };
 		377F47FC08CAFD998E0A8CCF /* Pods-MovieApp-MovieAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		44D3E40920EA637238D5A4BB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		7588FFE644E97B3B39D0BA22 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 			children = (
 				36A1D0F52B47B3E60071620E /* Mocks */,
 				36A1D0FA2B47B7090071620E /* NetworkServiceTest.swift */,
+				36A1D0FF2B47BE3F0071620E /* DataTransferServiceTest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				36A1D0FB2B47B7090071620E /* NetworkServiceTest.swift in Sources */,
 				36A1D0F32B47B3AA0071620E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				36A1D0FE2B47BC3B0071620E /* MovieModelMock.swift in Sources */,
+				36A1D1002B47BE3F0071620E /* DataTransferServiceTest.swift in Sources */,
 				36A1D0F72B47B3EC0071620E /* NetworkSessionMockImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
